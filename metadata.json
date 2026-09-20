@@ -1,0 +1,7 @@
+{
+  "name": "Kisan AI Sahayak",
+  "description": "Smart voice and visual agricultural assistant for rural farmers. Instant crop disease diagnosis, weather alerts, mandi rates, and audio guidance.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="100" fill="#0f172a" />
+  <circle cx="256" cy="256" r="220" fill="#064e3b" opacity="0.6"/>
+  <circle cx="256" cy="256" r="190" fill="#022c22"/>
+  <!-- Sun / Dawn -->
+  <circle cx="256" cy="180" r="50" fill="#f59e0b" opacity="0.9"/>
+  <!-- Stylized golden rays -->
+  <path d="M256 100 L256 120 M180 180 L200 180 M312 180 L332 180 M202 126 L216 140 M310 126 L296 140" stroke="#fef08a" stroke-width="8" stroke-linecap="round"/>
+  <!-- Sprout / Wheat seedling -->
+  <path d="M256 380 C256 310 256 260 256 210" stroke="#10b981" stroke-width="16" stroke-linecap="round"/>
+  <path d="M256 270 C220 250 170 260 160 300 C180 320 230 310 256 280 Z" fill="#34d399"/>
+  <path d="M256 240 C290 220 340 230 352 270 C330 290 280 280 256 250 Z" fill="#10b981"/>
+  <!-- Soil horizon -->
+  <path d="M120 380 Q256 410 392 380" stroke="#d97706" stroke-width="14" stroke-linecap="round"/>
+</svg>
