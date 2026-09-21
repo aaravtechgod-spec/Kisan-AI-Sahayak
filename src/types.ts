@@ -197,4 +197,94 @@ export interface OfflineEmergencyItem {
   urgentAction: string;
 }
 
+export interface BricsAgriNNode {
+  id: string;
+  countryCode: 'IN' | 'BR' | 'ZA' | 'CN' | 'RU' | 'AE' | 'ET' | 'EG';
+  countryName: string;
+  countryNameHindi: string;
+  institutionName: string;
+  flag: string;
+  status: 'ONLINE' | 'SYNCED' | 'FEDERATING';
+  agroClimaticZones: string[];
+  sharedModelsCount: number;
+  carbonSequesteredMT: string;
+  dataPointsExchanged: string;
+  focalContact: string;
+}
+
+export interface SatelliteObservation {
+  ndvi: number; // 0.0 - 1.0 (Normalized Difference Vegetation Index)
+  ndviTrend: 'Greening' | 'Stable' | 'Browning/Stress';
+  ndre: number; // Red Edge Chlorophyll Index
+  soilMoisturePct: number; // Root zone moisture %
+  surfaceTempC: number;
+  leafAreaIndex: number;
+  cloudCoverPct: number;
+  satellitePlatform: string;
+  resolutionMeters: number;
+  lastPassTimestamp: string;
+}
+
+export interface SoilHealthProfile {
+  sampleId: string;
+  ph: number;
+  organicCarbonPct: number;
+  nitrogenKgHa: number;
+  phosphorusKgHa: number;
+  potassiumKgHa: number;
+  electricalConductivityDsM: number;
+  zincPpm: number;
+  boronPpm: number;
+  soilTexture: string;
+  healthGrade: 'Degraded' | 'Moderate' | 'Regenerative High';
+}
+
+export interface RegenerativeBioInput {
+  name: string;
+  type: 'Biofertilizer' | 'Biostimulant' | 'Biochar' | 'Microbial Inoculant' | 'Green Manure';
+  applicationRate: string;
+  benefit: string;
+  benefitHindi: string;
+}
+
+export interface RegenerativeAdvisory {
+  id: string;
+  timestamp: string;
+  country: string;
+  agroZone: string;
+  primaryCrop: string;
+  companionCrop: string;
+  coverCropRotation: string;
+  carbonSequestrationEstTonsHa: number;
+  syntheticFertilizerReductionPct: number;
+  soilHealthDeltaScore: number; // e.g. +34%
+  bioInputsPrescription: RegenerativeBioInput[];
+  soilRestorationSteps: string[];
+  soilRestorationStepsHindi: string[];
+  weatherRiskMitigation: string;
+  weatherRiskMitigationHindi: string;
+  waterConservationMethod: string;
+  estimatedFarmerSavingsPerHa: number;
+  dpgSchemaStandard: string;
+  federatedModelReference: string;
+}
+
+export interface BricsFederatedModel {
+  id: string;
+  name: string;
+  category: 'Soil Carbon' | 'Pest Surveillance' | 'Drought & Salinity' | 'Microclimate AI' | 'Regenerative Yield';
+  contributingNation: string;
+  contributingInstitution: string;
+  flag: string;
+  license: string;
+  accuracyF1Score: number;
+  parametersCount: string;
+  trainingSamples: string;
+  status: 'Active Federation' | 'Peer Reviewed';
+  description: string;
+  descriptionHindi: string;
+  downloadEndpoint: string;
+  interoperableFormat: 'ONNX' | 'TensorFlow Lite' | 'PyTorch' | 'JSON-LD Schema';
+}
+
 

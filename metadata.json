@@ -1,6 +1,6 @@
 {
   "name": "Kisan AI Sahayak",
-  "description": "Smart voice and visual agricultural assistant for rural farmers. Instant crop disease diagnosis, weather alerts, mandi rates, and audio guidance.",
+  "description": "Interoperable digital agriculture network inspired by BRICS AgriN. Real-time localised agro-advisories, satellite telemetry, soil health analytics, regenerative crop recommendations, and multimodal disease diagnostics as a scalable digital public good.",
   "requestFramePermissions": ["camera", "microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

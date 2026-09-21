@@ -24,6 +24,7 @@ import { MandiMarketTracker } from './components/MandiMarketTracker';
 import { WeatherSprayAdvisoryCard } from './components/WeatherSprayAdvisoryCard';
 import { FertilizerCalculatorModal } from './components/FertilizerCalculatorModal';
 import { OfflineEmergencyGuideModal } from './components/OfflineEmergencyGuideModal';
+import { BricsAgriNNetworkHub } from './components/BricsAgriNNetworkHub';
 import {
   DEFAULT_FARMERS,
   INITIAL_POSTS,
@@ -52,6 +53,7 @@ import {
   Download,
   CloudSun,
   WifiOff,
+  Globe,
 } from 'lucide-react';
 
 const INITIAL_STATUS: StatusBlock = {
@@ -121,8 +123,8 @@ export default function App() {
   const [copiedSummary, setCopiedSummary] = useState(false);
   const recognitionRef = useRef<any>(null);
 
-  // Main Section Tab: 'doctor' | 'mandi' | 'social' | 'chat' | 'profile'
-  const [mainTab, setMainTab] = useState<'doctor' | 'mandi' | 'social' | 'chat' | 'profile'>('doctor');
+  // Main Section Tab: 'doctor' | 'agrin' | 'mandi' | 'social' | 'chat' | 'profile'
+  const [mainTab, setMainTab] = useState<'doctor' | 'agrin' | 'mandi' | 'social' | 'chat' | 'profile'>('doctor');
 
   // New Breakthrough Agricultural Modals
   const [isScannerOpen, setIsScannerOpen] = useState(false);
@@ -599,6 +601,20 @@ ${activeAudit ? activeAudit.response.slice(0, 500) : 'सलाह तैया�
 
             <button
               type="button"
+              id="nav-brics-agrin-button"
+              onClick={() => setMainTab('agrin')}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                mainTab === 'agrin'
+                  ? 'bg-emerald-500 text-black shadow-md'
+                  : 'text-neutral-400 hover:text-white'
+              }`}
+            >
+              <span>🌐</span>
+              <span>{lang === 'en' ? 'BRICS AgriN' : 'ब्रिक्स नेटवर्क'}</span>
+            </button>
+
+            <button
+              type="button"
               onClick={() => setMainTab('mandi')}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
                 mainTab === 'mandi'
@@ -732,6 +748,20 @@ ${activeAudit ? activeAudit.response.slice(0, 500) : 'सलाह तैया�
           <div className="flex items-center gap-2">
             <button
               type="button"
+              id="ribbon-brics-agrin-button"
+              onClick={() => setMainTab('agrin')}
+              className={`px-3 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition whitespace-nowrap ${
+                mainTab === 'agrin'
+                  ? 'bg-emerald-500 text-black border-emerald-400 shadow-md'
+                  : 'bg-emerald-950/60 hover:bg-emerald-900/60 text-emerald-300 border-emerald-500/40'
+              }`}
+            >
+              <Globe className="w-3.5 h-3.5 text-emerald-400" />
+              <span>{lang === 'en' ? '🌐 BRICS AgriN Network' : '🌐 ब्रिक्स एग्री-नेटवर्क'}</span>
+            </button>
+
+            <button
+              type="button"
               onClick={() => setIsScannerOpen(true)}
               className="px-3 py-1.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 text-xs font-bold flex items-center gap-1.5 transition whitespace-nowrap shadow-sm shadow-emerald-950/40"
             >
@@ -798,6 +828,19 @@ ${activeAudit ? activeAudit.response.slice(0, 500) : 'सलाह तैया�
         >
           <span className="text-base leading-none">🌾</span>
           <span className="text-[10px]">{t.navDoctor}</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setMainTab('agrin')}
+          className={`flex-1 py-2 px-1 rounded-xl text-xs font-bold flex flex-col items-center gap-0.5 transition ${
+            mainTab === 'agrin'
+              ? 'bg-emerald-500 text-black shadow-md'
+              : 'text-neutral-400 hover:text-white bg-neutral-900/60'
+          }`}
+        >
+          <span className="text-base leading-none">🌐</span>
+          <span className="text-[10px]">{lang === 'en' ? 'AgriN' : 'ब्रिक्स'}</span>
         </button>
 
         <button
@@ -1264,6 +1307,16 @@ ${activeAudit ? activeAudit.response.slice(0, 500) : 'सलाह तैया�
             </div>
           </main>
         </>
+      )}
+
+      {/* VIEW: BRICS AGRIN INTEROPERABLE DIGITAL AGRICULTURE NETWORK */}
+      {mainTab === 'agrin' && (
+        <main className="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-4 lg:p-6">
+          <BricsAgriNNetworkHub
+            lang={lang}
+            onOpenDiseaseScanner={() => setIsScannerOpen(true)}
+          />
+        </main>
       )}
 
       {/* VIEW: MANDI RATES & PRICE INTELLIGENCE */}
