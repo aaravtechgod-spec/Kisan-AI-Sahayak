@@ -245,6 +245,10 @@ export const BricsAgriNNetworkHub: React.FC<BricsAgriNNetworkHubProps> = ({
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                 8 Federated Nodes Live
               </span>
+              <span className="px-2.5 py-1 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/40 text-xs font-mono font-bold tracking-wider flex items-center gap-1.5">
+                <span>🖥️</span>
+                Indoor Research Console
+              </span>
             </div>
 
             <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
@@ -256,6 +260,10 @@ export const BricsAgriNNetworkHub: React.FC<BricsAgriNNetworkHubProps> = ({
                 ? 'An open, interoperable agricultural intelligence network uniting BRICS research institutions. Fusing real-time Earth Observation satellite data, Soil Health Card analytics, and microclimate forecasting to deliver actionable regenerative advisories and transboundary crop disease defense.'
                 : 'ब्रिक्स देशों का खुला व अंतर-संचालनीय डिजिटल कृषि नेटवर्क। उपग्रह डेटा (NDVI), मृदा स्वास्थ्य कार्ड और मौसम पूर्वानुमान के आधार पर जैविक व पुनर्जनन खेती की सटीक सलाह।'}
             </p>
+            <div className="mt-2 text-[11px] font-mono text-neutral-400 flex items-center gap-1.5">
+              <span>🖥️</span>
+              <span>{lang === 'en' ? 'Console Theme: High-density dark layout calibrated for indoor desktop lab terminals & extension kiosks.' : 'कंसोल थीम: प्रयोगशाला और विस्तार केंद्रों के कंप्यूटर मॉनिटर हेतु डार्क मोड।'}</span>
+            </div>
           </div>
 
           <div className="flex flex-col sm:flex-row md:flex-col items-start sm:items-center md:items-end gap-2 shrink-0">
@@ -399,6 +407,23 @@ export const BricsAgriNNetworkHub: React.FC<BricsAgriNNetworkHubProps> = ({
                 </button>
               </div>
 
+              {/* Institutional Agronomist Console Notice (FIX 2) */}
+              <div className="p-3 mb-4 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-200 text-xs flex items-start gap-2.5">
+                <span className="text-base shrink-0">🔬</span>
+                <div>
+                  <span className="font-bold text-white block">
+                    {lang === 'en'
+                      ? 'Institutional & Agronomist Data Entry Console'
+                      : 'संस्थागत व वैज्ञानिक डेटा प्रविष्टि कंसोल'}
+                  </span>
+                  <span className="text-[11px] text-emerald-300/90 leading-relaxed block mt-0.5">
+                    {lang === 'en'
+                      ? 'For Agricultural Extension Officers (AEOs), KVK Scientists, and Agronomy Researchers entering calibrated field telemetry on behalf of smallholders.'
+                      : 'कृषि विज्ञान केंद्र (KVK) वैज्ञानिकों व विस्तार अधिकारियों द्वारा किसानों के खेत का प्रमाणित डेटा दर्ज करने के लिए।'}
+                  </span>
+                </div>
+              </div>
+
               {/* Crop & Land Size */}
               <div className="space-y-4">
                 <div>
@@ -448,14 +473,20 @@ export const BricsAgriNNetworkHub: React.FC<BricsAgriNNetworkHubProps> = ({
                   </div>
                 </div>
 
-                {/* Soil Health Card Parameters */}
+                {/* Soil Health Card Parameters (FIX 3: Explicitly cite India's real national SHC scheme) */}
                 <div className="p-3.5 rounded-xl bg-neutral-900/80 border border-neutral-800 space-y-3">
                   <div className="flex items-center justify-between text-xs font-bold text-emerald-400">
                     <span className="flex items-center gap-1.5">
                       <FileText className="w-3.5 h-3.5" />
-                      {lang === 'en' ? 'Soil Health Card Metrics' : 'मृदा स्वास्थ्य कार्ड आंकड़े'}
+                      {lang === 'en' ? 'Soil Health Card (Govt. of India Scheme)' : 'मृदा स्वास्थ्य कार्ड (भारत सरकार)'}
                     </span>
-                    <span className="text-[10px] font-mono text-neutral-400">ID: {soilProfile.sampleId}</span>
+                    <span className="text-[10px] font-mono text-neutral-400">Portal Ref: {soilProfile.sampleId}</span>
+                  </div>
+
+                  <div className="text-[10px] text-neutral-400 font-mono">
+                    {lang === 'en'
+                      ? '🏛️ Source: Dept of Agriculture & Farmers Welfare, Ministry of Agriculture (soilhealth.dac.gov.in) — 12-Parameter National Standard'
+                      : '🏛️ स्रोत: कृषि एवं किसान कल्याण विभाग, भारत सरकार (soilhealth.dac.gov.in) — १२ मानक पैरामीटर'}
                   </div>
 
                   <div className="grid grid-cols-3 gap-2 text-center font-mono">

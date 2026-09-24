@@ -157,6 +157,26 @@ export interface WeatherSprayAdvisory {
   spraySafetyReason: string;
   spraySafetyReasonHindi: string;
   optimalSprayHours: string;
+  // Multi-Input Regenerative Intelligence (NASA POWER Soil Moisture + Gemini)
+  soilSignal?: {
+    source: string;
+    surfaceWetnessRatio: number; // 0.0 to 1.0 (GWETTOP)
+    surfaceWetnessPercent: number; // e.g. 62%
+    status: 'OPTIMAL' | 'WATERLOGGED' | 'DRY';
+    statusHindi: string;
+  };
+  regenerativeAdvisory?: {
+    verdict: 'SAFE' | 'CAUTION' | 'URGENT';
+    spokenSentence: string;
+    spokenSentenceHindi: string;
+    actionType: 'COVER_CROP' | 'INPUT_REDUCTION' | 'CROP_ROTATION' | 'ORGANIC_MULCH';
+    primaryAction: string;
+    primaryActionHindi: string;
+    practice: string;
+    practiceHindi: string;
+    syntheticReductionPercent: number; // e.g. 25% Urea reduction
+    soilHealthBenefit: string;
+  };
   alerts: {
     title: string;
     titleHindi: string;
