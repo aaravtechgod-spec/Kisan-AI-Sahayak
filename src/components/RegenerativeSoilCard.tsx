@@ -33,6 +33,7 @@ export const RegenerativeSoilCard: React.FC<RegenerativeSoilCardProps> = ({
   const [loading, setLoading] = useState(!advisory);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [simulatedWetness, setSimulatedWetness] = useState<number | null>(null);
 
   const fetchAdvisory = async () => {
     setLoading(true);
@@ -57,7 +58,15 @@ export const RegenerativeSoilCard: React.FC<RegenerativeSoilCardProps> = ({
   const regen = advisory?.regenerativeAdvisory;
   const soil = advisory?.soilSignal;
 
-  const spokenSentence = regen
+  const wetness = simulatedWetness !== null ? simulatedWetness : (soil?.surfaceWetnessPercent ?? 62);
+  const isWetnessLow = wetness < 30;
+  const isWetnessWaterlogged = wetness > 75;
+
+  const spokenSentence = simulatedWetness === 15
+    ? lang === 'hi'
+      ? 'मिट्टी में नमी केवल 15% है। तुरंत पुआल की मल्चिंग करें और रासायनिक खाद रोकें।'
+      : 'Soil moisture is critically low at 15 percent. Apply straw mulch immediately and hold chemical fertilizer.'
+    : regen
     ? lang === 'hi'
       ? regen.spokenSentenceHindi
       : regen.spokenSentence
@@ -82,10 +91,6 @@ export const RegenerativeSoilCard: React.FC<RegenerativeSoilCardProps> = ({
       () => setIsSpeaking(false)
     );
   };
-
-  const wetness = soil?.surfaceWetnessPercent ?? 62;
-  const isWetnessLow = wetness < 30;
-  const isWetnessWaterlogged = wetness > 75;
 
   return (
     <div
@@ -162,11 +167,30 @@ export const RegenerativeSoilCard: React.FC<RegenerativeSoilCardProps> = ({
       <div className="mt-3.5 bg-white/95 rounded-2xl border-2 border-black p-3 shadow-inner">
         <div className="flex items-center justify-between text-[11px] font-black text-emerald-950 mb-1.5 px-0.5">
           <span className="flex items-center gap-1">
-            <Droplets className="w-3.5 h-3.5 text-blue-600" />
+            <Droplets className="w-3.5 h-3.5 text-emerald-700" />
             <span>{lang === 'hi' ? 'सैटेलाइट मृदा नमी (GWETTOP):' : 'Satellite Soil Moisture:'}</span>
           </span>
-          <span className="px-2 py-0.5 rounded-lg bg-emerald-200 border border-emerald-400 text-emerald-900 font-mono font-black text-xs">
-            {wetness}% {isWetnessLow ? (lang === 'hi' ? 'सूखा' : 'Dry') : isWetnessWaterlogged ? (lang === 'hi' ? 'जलभराव' : 'Saturated') : (lang === 'hi' ? 'उत्तम' : 'Optimal')}
+          <span
+            className={`px-2 py-0.5 rounded-lg border font-mono font-black text-xs ${
+              isWetnessLow
+                ? 'bg-amber-100 border-amber-400 text-amber-900'
+                : isWetnessWaterlogged
+                ? 'bg-sky-100 border-sky-400 text-sky-900'
+                : 'bg-emerald-200 border-emerald-400 text-emerald-900'
+            }`}
+          >
+            {wetness}%{' '}
+            {isWetnessLow
+              ? lang === 'hi'
+                ? 'कम नमी (मल्चिंग करें)'
+                : 'Low Moisture (Mulch)'
+              : isWetnessWaterlogged
+              ? lang === 'hi'
+                ? 'अधिक नमी (जलभराव)'
+                : 'High Moisture'
+              : lang === 'hi'
+              ? 'उत्तम नमी'
+              : 'Optimal'}
           </span>
         </div>
 
@@ -213,6 +237,46 @@ export const RegenerativeSoilCard: React.FC<RegenerativeSoilCardProps> = ({
 
         {showDetails && (
           <div className="space-y-2 pt-2 mt-1 border-t border-emerald-900/15">
+            {/* Quick Demonstration of Drought/Low Moisture Mode vs Live NASA */}
+            <div className="p-2.5 rounded-xl bg-emerald-100/70 border border-emerald-300 text-left">
+              <div className="flex items-center justify-between text-[11px] font-black text-emerald-950 mb-1.5">
+                <span>{lang === 'hi' ? '🧪 मृदा नमी टॉगल (Inspect State):' : '🧪 Moisture State Toggle:'}</span>
+                <span className="text-[10px] font-mono text-emerald-900 bg-white/80 px-1.5 py-0.5 rounded border border-emerald-300">
+                  {simulatedWetness === 15 ? (lang === 'hi' ? 'सक्रिय: 15% कम नमी' : 'Active: 15% Low Moisture') : (lang === 'hi' ? 'सक्रिय: 62% लाइव नासा' : 'Active: 62% Live NASA')}
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSimulatedWetness(null);
+                  }}
+                  className={`py-1.5 px-2 rounded-lg text-xs font-bold border transition ${
+                    simulatedWetness === null
+                      ? 'bg-emerald-700 text-white border-black shadow-xs font-black'
+                      : 'bg-white text-emerald-900 border-emerald-300'
+                  }`}
+                >
+                  🛰️ {lang === 'hi' ? 'लाइव नासा (62% उत्तम)' : 'Live NASA (62% Optimal)'}
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSimulatedWetness(15);
+                  }}
+                  className={`py-1.5 px-2 rounded-lg text-xs font-bold border transition ${
+                    simulatedWetness === 15
+                      ? 'bg-amber-500 text-black border-black shadow-xs font-black'
+                      : 'bg-white text-amber-900 border-amber-300'
+                  }`}
+                >
+                  🌾 {lang === 'hi' ? 'कम नमी (15% सूखा)' : 'Low Moisture (15% Test)'}
+                </button>
+              </div>
+            </div>
+
             <div className="p-2.5 rounded-xl bg-white border border-emerald-300 text-left">
               <div className="flex items-center justify-between text-[11px] font-black text-emerald-900">
                 <span className="flex items-center gap-1">

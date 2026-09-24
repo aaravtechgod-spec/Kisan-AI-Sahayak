@@ -243,7 +243,7 @@ export const BricsAgriNNetworkHub: React.FC<BricsAgriNNetworkHubProps> = ({
               </span>
               <span className="px-2.5 py-1 rounded-md bg-emerald-500/30 text-emerald-200 text-xs font-mono font-bold flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                8 Federated Nodes Live
+                6 Nodes Connected • 2 In Progress
               </span>
               <span className="px-2.5 py-1 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/40 text-xs font-mono font-bold tracking-wider flex items-center gap-1.5">
                 <span>🖥️</span>
@@ -267,24 +267,15 @@ export const BricsAgriNNetworkHub: React.FC<BricsAgriNNetworkHubProps> = ({
           </div>
 
           <div className="flex flex-col sm:flex-row md:flex-col items-start sm:items-center md:items-end gap-2 shrink-0">
-            <div className="px-3.5 py-2 rounded-xl bg-black/40 border border-emerald-500/30 text-right backdrop-blur-sm">
+            <div className="px-3.5 py-2 rounded-xl bg-black/50 border border-amber-500/30 text-right backdrop-blur-sm">
               <div className="text-[10px] text-neutral-400 font-mono uppercase tracking-wider">
-                {lang === 'en' ? 'Pan-BRICS Carbon Sequestered' : 'कुल अवशोषित जैविक कार्बन'}
+                {lang === 'en' ? 'Pillar 1 Schema Status' : 'पिलर 1 स्कीमा स्थिति'}
               </div>
-              <div className="text-lg font-bold font-mono text-emerald-400 flex items-center gap-1.5">
-                <TrendingUp className="w-4 h-4 text-emerald-400" />
-                7.72 Million MT CO₂e
+              <div className="text-xs font-bold font-mono text-amber-300 flex items-center gap-1.5 mt-0.5">
+                <span>⏳</span>
+                <span>{lang === 'en' ? 'Agro-Advisory Schema In Progress' : 'एग्रो-एडवाइजरी स्कीमा प्रगति पर'}</span>
               </div>
             </div>
-
-            <button
-              type="button"
-              onClick={() => setDpgSchemaOpen(true)}
-              className="text-xs font-mono text-cyan-400 hover:text-cyan-300 underline flex items-center gap-1 py-1"
-            >
-              <FileText className="w-3.5 h-3.5" />
-              <span>{lang === 'en' ? 'Inspect DPG Open JSON-LD Schema' : 'ओपन DPG स्कीमा देखें'}</span>
-            </button>
           </div>
         </div>
 
@@ -294,27 +285,36 @@ export const BricsAgriNNetworkHub: React.FC<BricsAgriNNetworkHubProps> = ({
             {lang === 'en' ? 'Federated Nodes:' : 'सदस्य राष्ट्र:'}
           </span>
           {[
-            { code: 'IN', flag: '🇮🇳', name: 'India (ICAR)' },
-            { code: 'BR', flag: '🇧🇷', name: 'Brazil (EMBRAPA)' },
-            { code: 'ZA', flag: '🇿🇦', name: 'South Africa (ARC)' },
-            { code: 'CN', flag: '🇨🇳', name: 'China (CAAS)' },
-            { code: 'RU', flag: '🇷🇺', name: 'Russia (VIZR)' },
-            { code: 'AE', flag: '🇦🇪', name: 'UAE (ICBA)' },
-            { code: 'ET', flag: '🇪🇹', name: 'Ethiopia (EIAR)' },
-            { code: 'EG', flag: '🇪🇬', name: 'Egypt (ARC)' },
+            { code: 'IN', flag: '🇮🇳', name: 'India (ICAR)', isComingSoon: false },
+            { code: 'BR', flag: '🇧🇷', name: 'Brazil (EMBRAPA)', isComingSoon: false },
+            { code: 'ZA', flag: '🇿🇦', name: 'South Africa (ARC)', isComingSoon: false },
+            { code: 'CN', flag: '🇨🇳', name: 'China (CAAS)', isComingSoon: false },
+            { code: 'RU', flag: '🇷🇺', name: 'Russia (VIZR)', isComingSoon: false },
+            { code: 'AE', flag: '🇦🇪', name: 'UAE (ICBA)', isComingSoon: false },
+            { code: 'ET', flag: '🇪🇹', name: 'Ethiopia (EIAR)', isComingSoon: true },
+            { code: 'EG', flag: '🇪🇬', name: 'Egypt (ARC)', isComingSoon: true },
           ].map((c) => (
             <button
               key={c.code}
               type="button"
-              onClick={() => handleCountryChange(c.code)}
+              disabled={c.isComingSoon}
+              onClick={() => !c.isComingSoon && handleCountryChange(c.code)}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${
-                selectedNode === c.code
+                c.isComingSoon
+                  ? 'bg-neutral-900/40 text-neutral-500 border border-neutral-800 border-dashed cursor-not-allowed opacity-70'
+                  : selectedNode === c.code
                   ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/20 scale-105'
                   : 'bg-neutral-800/80 hover:bg-neutral-700 text-neutral-300 border border-neutral-700/60'
               }`}
+              title={c.isComingSoon ? (lang === 'en' ? 'Pillar 1 Interoperability Integration In Progress' : 'पिलर 1 के अंतर्गत एकीकरण प्रगति पर') : undefined}
             >
               <span>{c.flag}</span>
               <span>{c.name}</span>
+              {c.isComingSoon && (
+                <span className="text-[9px] px-1 py-0.5 rounded bg-neutral-800 text-amber-400/80 font-mono">
+                  {lang === 'en' ? 'Coming Soon' : 'प्रगति पर'}
+                </span>
+              )}
             </button>
           ))}
         </div>
@@ -358,7 +358,7 @@ export const BricsAgriNNetworkHub: React.FC<BricsAgriNNetworkHubProps> = ({
           }`}
         >
           <Cpu className="w-4 h-4" />
-          <span>{lang === 'en' ? 'DPG Model Registry' : 'ओपन मॉडल रजिस्ट्री'}</span>
+          <span>{lang === 'en' ? 'DPG Models (Coming Soon)' : 'ओपन मॉडल (प्रगति पर)'}</span>
         </button>
 
         <button
@@ -955,11 +955,28 @@ export const BricsAgriNNetworkHub: React.FC<BricsAgriNNetworkHubProps> = ({
               </div>
             </div>
 
-            <p className="text-xs sm:text-sm text-neutral-300 mb-5">
+            <p className="text-xs sm:text-sm text-neutral-300 mb-4">
               {lang === 'en'
                 ? 'These artificial intelligence models are contributed as Digital Public Goods by national research institutes across BRICS member states (ICAR, EMBRAPA, ARC, CAAS, VIZR) to democratize climate-resilient agriculture.'
                 : 'ये एआई मॉडल्स ब्रिक्स अनुसंधान संस्थानों (ICAR, EMBRAPA, ARC) द्वारा डिजिटल पब्लिक गुड के रूप में साझा किए गए हैं ताकि सभी किसान लाभान्वित हो सकें।'}
             </p>
+
+            {/* Pillar 1 In-Progress Honest Notice */}
+            <div className="mb-5 p-3 rounded-xl bg-amber-950/30 border border-amber-500/30 text-amber-200 text-xs flex items-start gap-2.5">
+              <span className="text-base shrink-0">⏳</span>
+              <div>
+                <span className="font-bold text-white block">
+                  {lang === 'en'
+                    ? 'Pillar 1 Milestone: Pan-BRICS JSON Schema & Interoperable API [In Progress]'
+                    : 'पिलर 1 प्रगति: पैन-ब्रिक्स JSON स्कीमा व इंटरऑपरेबल एंडपॉइंट [प्रगति पर]'}
+                </span>
+                <span className="text-[11px] text-amber-300/80 leading-relaxed block mt-0.5">
+                  {lang === 'en'
+                    ? 'The documented agro-advisory JSON schema and public REST endpoint (/api/v1/agro-advisory) are currently being developed. Live automated model synchronization will be connected once the schema ships.'
+                    : 'ट्रैक 4 हेतु पिलर 1 का लाइव JSON स्कीमा एवं एंडपॉइंट तैयार किया जा रहा है। इसके पूर्ण होने पर लाइव मॉडल सिंक सक्रिय होगा।'}
+                </span>
+              </div>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {models.map((mod) => (
