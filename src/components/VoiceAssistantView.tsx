@@ -251,7 +251,8 @@ export const VoiceAssistantView: React.FC<VoiceAssistantViewProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900 pb-16">
+    <div className="min-h-screen bg-slate-900/5 sm:bg-slate-200 flex justify-center">
+      <div className="w-full max-w-md min-h-screen bg-slate-100 text-slate-900 pb-16 shadow-2xl relative sm:border-x border-slate-300/80 flex flex-col">
       {/* Top High-Contrast Navigation Bar */}
       <header className="sticky top-0 z-30 bg-white border-b-3 border-black px-4 py-3 flex items-center justify-between shadow-sm">
         <button
@@ -281,7 +282,7 @@ export const VoiceAssistantView: React.FC<VoiceAssistantViewProps> = ({
         </a>
       </header>
 
-      <main className="max-w-md mx-auto p-4 space-y-4">
+      <main className="w-full p-4 space-y-4 flex-1">
         {/* THE GIANT PRIMARY MIC ACTION BUTTON (>= 25% screen height) */}
         <div className="bg-white rounded-3xl border-3 border-black p-5 text-center shadow-[0_6px_0_0_#000] space-y-4">
           <span className="text-xs sm:text-sm font-black text-slate-600 uppercase tracking-wider block">
@@ -447,6 +448,7 @@ export const VoiceAssistantView: React.FC<VoiceAssistantViewProps> = ({
           </div>
         )}
       </main>
+      </div>
     </div>
   );
 };

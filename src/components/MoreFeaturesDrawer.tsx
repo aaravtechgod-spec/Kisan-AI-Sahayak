@@ -40,6 +40,8 @@ export const MoreFeaturesDrawer: React.FC<MoreFeaturesDrawerProps> = ({
       tag: 'Research Node',
       tagColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
     },
+    // Mandi Rates nav entry omitted for recording audit (data source is mock array, not live Agmarknet API)
+    /*
     {
       id: 'mandi' as const,
       icon: '📈',
@@ -50,6 +52,7 @@ export const MoreFeaturesDrawer: React.FC<MoreFeaturesDrawerProps> = ({
       tag: 'APMC Live',
       tagColor: 'bg-amber-100 text-amber-800 border-amber-300',
     },
+    */
     {
       id: 'fertilizer' as const,
       icon: '🧮',

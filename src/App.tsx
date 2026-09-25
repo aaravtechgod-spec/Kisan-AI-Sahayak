@@ -274,36 +274,37 @@ export default function App() {
   // ROUTE 3: COLLAPSED SECONDARY VIEWS (WITH 1-TAP "BACK TO HOME")
   if (activeView !== 'home') {
     return (
-      <div className="min-h-screen bg-slate-100 text-slate-900 pb-16">
-        {/* Sticky Back Header */}
-        <header className="sticky top-0 z-40 bg-white border-b-3 border-black px-4 py-3 flex items-center justify-between shadow-sm">
-          <button
-            type="button"
-            onClick={() => setActiveView('home')}
-            className="h-12 px-4 rounded-xl border-2 border-black bg-slate-100 active:bg-slate-200 font-black text-sm flex items-center gap-2 shadow-[0_3px_0_0_#000]"
-          >
-            <ArrowLeft className="w-5 h-5 text-black" />
-            <span>{lang === 'hi' ? '🔙 मुख्य पृष्ठ' : '🔙 Home'}</span>
-          </button>
+      <div className="min-h-screen bg-slate-900/5 sm:bg-slate-200 flex justify-center">
+        <div className="w-full max-w-md min-h-screen bg-slate-100 text-slate-900 pb-16 shadow-2xl relative sm:border-x border-slate-300/80 flex flex-col">
+          {/* Sticky Back Header */}
+          <header className="sticky top-0 z-40 bg-white border-b-3 border-black px-4 py-3 flex items-center justify-between shadow-sm">
+            <button
+              type="button"
+              onClick={() => setActiveView('home')}
+              className="h-12 px-4 rounded-xl border-2 border-black bg-slate-100 active:bg-slate-200 font-black text-sm flex items-center gap-2 shadow-[0_3px_0_0_#000]"
+            >
+              <ArrowLeft className="w-5 h-5 text-black" />
+              <span>{lang === 'hi' ? '🔙 मुख्य पृष्ठ' : '🔙 Home'}</span>
+            </button>
 
-          <span className="font-black text-sm sm:text-base text-slate-900">
-            {activeView === 'agrin' && (lang === 'hi' ? '🌐 ब्रिक्स AgriN नेटवर्क' : '🌐 BRICS AgriN Hub')}
-            {activeView === 'mandi' && (lang === 'hi' ? '📈 मंडी भाव व सलाह' : '📈 Mandi Rates')}
-            {activeView === 'social' && (lang === 'hi' ? '📸 किसान चौपाल' : '📸 Community Feed')}
-            {activeView === 'chat' && (lang === 'hi' ? '💬 किसान संदेश' : '💬 Direct Chat')}
-            {activeView === 'profile' && (lang === 'hi' ? '👤 प्रोफ़ाइल' : '👤 Profile')}
-          </span>
+            <span className="font-black text-sm sm:text-base text-slate-900">
+              {activeView === 'agrin' && (lang === 'hi' ? '🌐 ब्रिक्स AgriN नेटवर्क' : '🌐 BRICS AgriN Hub')}
+              {activeView === 'mandi' && (lang === 'hi' ? '📈 मंडी भाव व सलाह' : '📈 Mandi Rates')}
+              {activeView === 'social' && (lang === 'hi' ? '📸 किसान चौपाल' : '📸 Community Feed')}
+              {activeView === 'chat' && (lang === 'hi' ? '💬 किसान संदेश' : '💬 Direct Chat')}
+              {activeView === 'profile' && (lang === 'hi' ? '👤 प्रोफ़ाइल' : '👤 Profile')}
+            </span>
 
-          <a
-            href="tel:18001801551"
-            className="h-12 w-12 rounded-xl border-2 border-black bg-emerald-400 active:bg-emerald-500 flex items-center justify-center shadow-[0_3px_0_0_#000]"
-            title="Call Helpline"
-          >
-            <PhoneCall className="w-6 h-6 text-black" />
-          </a>
-        </header>
+            <a
+              href="tel:18001801551"
+              className="h-12 w-12 rounded-xl border-2 border-black bg-emerald-400 active:bg-emerald-500 flex items-center justify-center shadow-[0_3px_0_0_#000]"
+              title="Call Helpline"
+            >
+              <PhoneCall className="w-6 h-6 text-black" />
+            </a>
+          </header>
 
-        <main className="max-w-5xl mx-auto p-3 sm:p-4">
+          <main className="p-3 sm:p-4 flex-1">
           {activeView === 'agrin' && (
             <BricsAgriNNetworkHub
               lang={lang}
@@ -364,6 +365,7 @@ export default function App() {
             />
           )}
         </main>
+        </div>
       </div>
     );
   }
@@ -375,11 +377,12 @@ export default function App() {
   // 1 home screen, exactly 3-4 giant tactile icon buttons max.
   // -------------------------------------------------------------
   return (
-    <div
-      className={`min-h-screen pb-14 font-sans transition-colors ${
-        isSunMode ? 'bg-white text-black' : 'bg-slate-100 text-slate-900'
-      }`}
-    >
+    <div className="min-h-screen bg-slate-900/5 sm:bg-slate-200 flex justify-center">
+      <div
+        className={`w-full max-w-md min-h-screen pb-14 font-sans transition-colors shadow-2xl relative sm:border-x border-slate-300/80 flex flex-col ${
+          isSunMode ? 'bg-white text-black' : 'bg-slate-100 text-slate-900'
+        }`}
+      >
       {/* High-Contrast Outdoor Top Bar */}
       <header className="sticky top-0 z-30 bg-white border-b-3 border-black px-3 py-2.5 flex items-center justify-between shadow-sm">
         {/* Brand & Audio Welcome */}
@@ -458,7 +461,7 @@ export default function App() {
       </header>
 
       {/* Main Single-Column Thumb Area (Fits a 5" 720p Screen) */}
-      <main className="max-w-md mx-auto p-3 sm:p-4 space-y-3.5">
+      <main className="w-full p-3 sm:p-4 space-y-3.5 flex-1">
         {/* ============================================================ */}
         {/* FIX 5: LEAD WITH STRONGEST FEATURE: CROP DOCTOR (DIAGNOSTIC)  */}
         {/* FIX 4: Entire card is one giant tap target with pressed state */}
@@ -641,6 +644,7 @@ export default function App() {
         lang={lang}
         onToggleLang={toggleLanguage}
       />
+      </div>
     </div>
   );
 }

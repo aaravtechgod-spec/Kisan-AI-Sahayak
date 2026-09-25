@@ -206,8 +206,9 @@ export const CropDiagnosisView: React.FC<CropDiagnosisViewProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900 pb-16">
-      {/* Hidden File Inputs for Direct Camera and Gallery */}
+    <div className="min-h-screen bg-slate-900/5 sm:bg-slate-200 flex justify-center">
+      <div className="w-full max-w-md min-h-screen bg-slate-100 text-slate-900 pb-16 shadow-2xl relative sm:border-x border-slate-300/80 flex flex-col">
+        {/* Hidden File Inputs for Direct Camera and Gallery */}
       <input
         type="file"
         ref={cameraInputRef}
@@ -256,7 +257,7 @@ export const CropDiagnosisView: React.FC<CropDiagnosisViewProps> = ({
         </a>
       </header>
 
-      <main className="max-w-md mx-auto p-4 space-y-4">
+      <main className="w-full p-4 space-y-4 flex-1">
         {/* STEP 1: INITIAL STATE (NO RESULT YET) */}
         {!diagnosis && !isScanning && (
           <div className="space-y-4">
@@ -571,6 +572,7 @@ export const CropDiagnosisView: React.FC<CropDiagnosisViewProps> = ({
           </div>
         )}
       </main>
+      </div>
     </div>
   );
 };
