@@ -3,6 +3,7 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import dotenv from "dotenv";
 import { GoogleGenAI, ThinkingLevel } from "@google/genai";
+import agroAdvisoryHandler from "./api/v1/agro-advisory";
 
 dotenv.config();
 
@@ -1221,6 +1222,9 @@ const BRICS_FEDERATED_MODELS = [
   },
 ];
 
+// BRICS AgriN Interoperable REST API v1 (Single implementation shared with Vercel)
+app.all("/api/v1/agro-advisory", (req, res) => agroAdvisoryHandler(req, res));
+
 // 1. Get BRICS AgriN Federated Nodes
 app.get("/api/brics-agrin/nodes", (req, res) => {
   res.json({
@@ -1229,7 +1233,7 @@ app.get("/api/brics-agrin/nodes", (req, res) => {
     initiative: 'BRICS Agricultural Research Platform (BARP / AgriN)',
     totalNodes: BRICS_FEDERATED_NODES.length,
     activeNodes: BRICS_FEDERATED_NODES.filter((n) => n.status === 'ONLINE').length,
-    totalCarbonSequesteredMT: '7.72M MT CO₂e',
+    agroAdvisorySchemaStatus: 'brics.agrin.agro-advisory.v1 Active',
     totalDataExchanges: '39.1M telemetry points',
     nodes: BRICS_FEDERATED_NODES,
   });

@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "AgroAdvisoryRecord": {
+      "title": "AgroAdvisoryRecord",
+      "description": "Federated interoperable agro-advisory record for BRICS AgriN digital public good network",
+      "type": "object",
+      "properties": {
+        "schemaVersion": { "type": "string" },
+        "recordId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "sourceNode": { "type": "object" },
+        "recommendationType": { "type": "string", "enum": ["spray-safety", "regenerative"] },
+        "crop": { "type": "object" },
+        "region": { "type": "object" },
+        "soilSignal": { "type": "object" },
+        "weatherSignal": { "type": "object" },
+        "recommendation": { "type": "object" }
+      },
+      "required": [
+        "schemaVersion",
+        "recordId",
+        "timestamp",
+        "sourceNode",
+        "recommendationType",
+        "crop",
+        "region",
+        "soilSignal",
+        "weatherSignal",
+        "recommendation"
+      ]
+    }
+  },
+  "firestore": {
+    "/agro_advisories/{advisoryId}": {
+      "schema": "AgroAdvisoryRecord",
+      "description": "Public agro-advisory records submitted by farmer nodes and partner federations"
+    }
+  }
+}

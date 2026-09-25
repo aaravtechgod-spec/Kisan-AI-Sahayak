@@ -1,0 +1,6 @@
+{
+  "firestore": {
+    "database": "ai-studio-kisanaisahayak-8b310804-edaf-4fd8-87c4-0e47798ed5a7",
+    "rules": "firestore.rules"
+  }
+}

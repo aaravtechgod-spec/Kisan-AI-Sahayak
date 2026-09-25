@@ -13,6 +13,7 @@ import {
   Thermometer,
 } from 'lucide-react';
 import { WeatherSprayAdvisory } from '../types';
+import { publishAgroAdvisoryRecord } from '../services/agroAdvisoryService';
 
 interface WeatherSprayAdvisoryCardProps {
   lang: 'en' | 'hi';
